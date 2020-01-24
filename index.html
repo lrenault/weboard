@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>the Weboard</title>
+    <meta name="description" content="Guitar rig in your Web Browser">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+    <body style=text-align:center;>
+      <div>
+        <input type="checkbox" id="connectSource" name="connectSource" value="connectSource">
+        <label for="connectSource">Connect Instrument</label>
+      </div>
+
+      <h4>Volume</h4>
+      <div class="slider-group"; style="border: 1px solid darkgrey;">
+        <div class="slider">
+          <label="volume-volume">Volume</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.5" id="volume">
+          <div class="slider-value" id="volume-log">0.5</div>
+        </div>
+      </div>
+
+      <input type="checkbox" id="compressor" name="compressor" value="compressor">
+      <label for="compressor">Compressor</label>
+      <div class="slider-group"; style="border: 1px solid blue;">
+        <div class="slider">
+          <label="comp-threshold">Threshold</label>
+          <input type="range" min="-100" max="0" step="1" value="-24" id="comp-threshold">
+          <div class="slider-value" id="comp-thresh-display">-24</div>
+        </div>
+        <div class="slider">
+          <label="comp-ratio">Ratio</label>
+          <input type="range" min="1" max="20" step="1" value="12" id="comp-ratio">
+          <div class="slider-value" id="comp-ratio-display">12</div>
+        </div>
+      </div>
+
+      <input type="checkbox" id="disto" name="disto" value="disto">
+      <label for="disto">Distortion</label>
+      <div class="slider-group"; style="border: 1px solid green;">
+        <div class="slider">
+          <label="disto-gain">Gain</label>
+          <input type="range" min="0" max="1" step="0.01" value="0" id="disto-gain">
+          <div class="slider-value" id="disto-gain-display">0.5</div>
+          <div class="kaos-enable">
+            <input type="radio" id="disto-gain-none" name="disto-gain" value="none" checked>
+            <label for="disto-gain-none">None</label>
+            <input type="radio" id="disto-gain-x" name="disto-gain" value="x">
+            <label for="disto-gain-x">X-axis</label>
+            <input type="radio" id="disto-gain-y" name="disto-gain" value="y">
+            <label for="disto-gain-y">Y-axis</label>
+          </div>
+        </div>
+      </div>
+
+      <input type="checkbox" id="highPassFilter" name="highPassFilter" value="highPassFilter">
+      <label for="compressor">High-Pass Filter</label>
+      <div class="slider-group"; style="border: 1px solid yellow;">
+        <div class="slider">
+          <label="high-pass-freq">Frequency</label>
+          <input type="range" min="10" max="22050" step="1" value="500" id="high-pass-freq">
+          <div class="slider-value" id="high-pass-freq-display">500</div>
+          <div class="kaos-enable">
+            <input type="radio" id="high-pass-freq-none" name="high-pass-freq" value="none" checked>
+            <label for="high-pass-freq-none">None</label>
+            <input type="radio" id="high-pass-freq-x" name="high-pass-freq" value="x">
+            <label for="high-pass-freq-x">X-axis</label>
+            <input type="radio" id="high-pass-freq-y" name="high-pass-freq" value="y">
+            <label for="high-pass-freq-y">Y-axis</label>
+          </div>
+        </div>
+        <div class="slider">
+          <label="high-pass-peak">Peak</label>
+          <input type="range" min="0.001" max="10" step="0.001" value="1" id="high-pass-peak">
+          <div class="slider-value" id="high-pass-peak-display">1</div>
+        </div>
+      </div>
+
+      <input type="checkbox" id="tremolo" name="tremolo" value="tremolo">
+      <label for="tremolo">Tremolo</label>
+      <div class="slider-group"; style="border: 1px solid blue;">
+        <div class="slider">
+          <label="tremolo-speed">Speed</label>
+          <input type="range" min="0" max="20" step="1" value="3" id="tremolo-speed">
+          <div class="slider-value" id="tremolo-speed-display">3</div>
+          <div class="kaos-enable">
+            <input type="radio" id="tremolo-speed-none" name="tremolo-speed" value="none" checked>
+            <label for="tremolo-speed-none">None</label>
+            <input type="radio" id="tremolo-speed-x" name="tremolo-speed" value="x">
+            <label for="tremolo-speed-x">X-axis</label>
+            <input type="radio" id="tremolo-speed-y" name="tremolo-speed" value="y">
+            <label for="tremolo-speed-y">Y-axis</label>
+          </div>
+        </div>
+        <div class="slider">
+          <label="tremolo-depth">Depth</label>
+          <input type="range" min="0" max="1" step="0.01" value="1" id="tremolo-depth">
+          <div class="slider-value" id="tremolo-depth-display">1</div>
+          <div class="kaos-enable">
+            <input type="radio" id="tremolo-depth-none" name="tremolo-depth" value="none" checked>
+            <label for="tremolo-depth-none">None</label>
+            <input type="radio" id="tremolo-depth-x" name="tremolo-depth" value="x">
+            <label for="tremolo-depth-x">X-axis</label>
+            <input type="radio" id="tremolo-depth-y" name="tremolo-depth" value="y">
+            <label for="tremolo-depth-y">Y-axis</label>
+          </div>
+        </div>
+      </div>
+
+      <figure class="kaos-pad" id="kaos-pad"></figure>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js"></script>
+      <script src="js/script.js"></script>
+    </body>
+</html>

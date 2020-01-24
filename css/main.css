@@ -1,0 +1,46 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.slider-group {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.slider-value {
+	height: 34px;
+	width: 50px;
+	display: inline-block;
+  position: relative;
+	border-left: solid 2px #ccc;
+	float: center;
+	line-height: 34px;
+	vertical-align: middle;
+	padding-left: 3px;
+	background: #EAE9E9;
+	font-size: 0.9em;
+}
+
+.kaos-enable {
+  display: inline-block;
+  position: relative;
+  float: center;
+}
+
+.kaos-pad {
+  border: 1px solid red;
+  height: 400px;
+  background: linear-gradient(135deg, rgb(0, 0, 44), rgb(255, 210, 255));
+}
