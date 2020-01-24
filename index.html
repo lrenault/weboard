@@ -33,36 +33,21 @@
         </div>
       </div>
 
-      <input type="checkbox" id="fuzz" name="fuzz" value="fuzz">
-      <label for="fuzz">Quadrafuzz</label>
-      <div class="slider-group"; style="border: 1px solid grey;">
+      <input type="checkbox" id="disto" name="disto" value="disto" checked>
+      <label for="disto">Distortion</label>
+      <div class="slider-group"; style="border: 1px solid green;">
         <div class="slider">
-          <label="fuzz-low">Low Gain</label>
-          <input type="range" min="0" max="1" step="0.01" value="0.6" id="fuzz-low">
-          <div class="slider-value">0.6</div>
-        </div>
-        <div class="slider">
-          <label="fuzz-mid-low">Mid-Low Gain</label>
-          <input type="range" min="0" max="1" step="0.01" value="0.8" id="fuzz-mid-low">
-          <div class="slider-value">0.8</div>
-        </div>
-        <div class="slider">
-          <label="fuzz-mid-high">Mid-High Gain</label>
-          <input type="range" min="0" max="1" step="0.01" value="0.5" id="fuzz-mid-high">
-          <div class="slider-value">0.5</div>
+          <label="disto-gain">Gain</label>
+          <input type="range" min="0" max="1" step="0.01" value="0" id="disto-gain">
+          <div class="slider-value" id="disto-gain-display">0.5</div>
           <div class="kaos-enable">
-            <input type="radio" id="fuzz-mid-high-none" name="fuzz-mid-high" value="none" checked>
-            <label for="fuzz-mid-high-none">None</label>
-            <input type="radio" id="fuzz-mid-high-x" name="fuzz-mid-high" value="x">
-            <label for="fuzz-mid-high-x">X-axis</label>
-            <input type="radio" id="fuzz-mid-high-y" name="fuzz-mid-high" value="y">
-            <label for="fuzz-mid-high-y">Y-axis</label>
+            <input type="radio" id="disto-gain-none" name="disto-gain" value="none" checked>
+            <label for="disto-gain-none">None</label>
+            <input type="radio" id="disto-gain-x" name="disto-gain" value="x">
+            <label for="disto-gain-x">X-axis</label>
+            <input type="radio" id="disto-gain-y" name="disto-gain" value="y">
+            <label for="disto-gain-y">Y-axis</label>
           </div>
-        </div>
-        <div class="slider">
-          <label="fuzz-high">High Gain</label>
-          <input type="range" min="0" max="1" step="0.01" value="0.6" id="fuzz-high">
-          <div class="slider-value">0.6</div>
         </div>
       </div>
 

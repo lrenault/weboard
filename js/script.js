@@ -26,22 +26,25 @@ comp_thresh.oninput = function() {
   document.getElementById("comp-thresh-display").innerHTML = this.value;
 }
 
-// Fuzz
-var fuzz_enable = document.querySelector('input[value="fuzz"]');
-let fuzz = new Pizzicato.Effects.Quadrafuzz({
-  lowGain: 0.6,
-  midLowGain: 0.8,
-  midHighGain: 0.5,
-  highGain: 0.6,
-  mix: 1.0
-});
+// disto
+var disto_enable = document.querySelector('input[value="disto"]');
+var disto_gain   = document.getElementById("disto-gain");
+var distoGainValue = disto_gain.value;
+console.log(distoGainValue);
+let disto = new Pizzicato.Effects.Distortion({ gain: disto_gain, });
+console.log(disto.gain);
 
-fuzz_enable.onchange = function() {
-  if (fuzz_enable.checked) {
-    instru.addEffect(fuzz);
+disto_enable.onchange = function() {
+  if (disto_enable.checked) {
+    instru.addEffect(disto);
   } else {
-    instru.removeEffect(fuzz);
+    instru.removeEffect(disto);
   }
+}
+disto_gain.oninput = function() {
+  disto.gain = this.value;
+  console.log(disto.gain);
+  document.getElementById("disto-gain-display").innerHTML = this.value;
 }
 
 // HighPassFilter
@@ -53,6 +56,7 @@ let highPassFilter = new Pizzicato.Effects.HighPassFilter({
   frequency: high_pass_freq,
   peak: high_pass_peak,
 });
+
 
 high_pass_enable.onchange = function() {
   if (high_pass_enable.checked) {
@@ -106,7 +110,8 @@ instrumentConnected.onchange = function() {
     console.log(Pizzicato.context);
 
     instru = new Pizzicato.Sound({ source : 'input'}, function() {
-      instru.addEffect(highPassFilter);
+      instru.addEffect(disto);
+      //instru.addEffect(highPassFilter);
       //instru.volume = volume_;
       instru.play();
       console.log("Connected");
@@ -120,26 +125,36 @@ instrumentConnected.onchange = function() {
 // Kaos-Pad
 kaosPad = document.getElementById("kaos-pad");
 kaosPad.addEventListener('mousemove', function(event) {
-  xValue = event.clientX / (kaosPad.offsetWidth + kaosPad.offsetLeft);
-  yValue = event.clientY / (kaosPad.offsetHeight);
-  console.log(xValue);
-  console.log(yValue);
+  //xValue = event.clientX / (kaosPad.offsetWidth + kaosPad.offsetLeft);
+  //yValue = event.clientY / (kaosPad.offsetHeight);
+  var rect = event.target.getBoundingClientRect();
+  var xValue = (event.clientX - rect.left) / rect.width;
+  var yValue = (event.clientY - rect.top) / rect.height;
 
-  if (document.getElementById('fuzz-mid-high-x').checked) {
-    fuzz.midHighGain = xValue;
-  } else if (document.getElementById('fuzz-mid-high-y').checked) {
-    fuzz.midHighGain = yValue;
+  if (document.getElementById('disto-gain-x').checked) {
+    disto.gain = xValue;
+    disto_gain.value = xValue;
+    document.getElementById("disto-gain-display").innerHTML = Math.trunc(xValue * 100) / 100;
+
+  } else if (document.getElementById('disto-gain-y').checked) {
+    disto.gain = yValue;
+    console.log(disto.gain);
+    disto_gain.value = yValue;
+    document.getElementById("disto-gain-display").innerHTML = Math.trunc(yValue * 100) / 100;
   }
 
   if (document.getElementById('high-pass-freq-x').checked) {
     highPassFilter.frequency = xValue * freqMax;
+    high_pass_freq.value = xValue * freqMax;
+    document.getElementById("high-pass-freq-display").innerHTML = Math.trunc(xValue * freqMax);
   } else if (document.getElementById('high-pass-freq-y').checked) {
     highPassFilter.frequency = yValue * freqMax;
+    high_pass_freq.value = yValue * freqMax;
+    document.getElementById("high-pass-freq-display").innerHTML = Math.trunc(xValue * freqMax);
   }
 
   //pingPongDelay.time = event.pageX / document.body.clientWidth;
   //instru.volume = event.pageX / document.body.clientWidth;
   //lowPassFilter.frequency = event.pageY / document.body.clientHeight * freqMax;
-  //freq = Math.log((kaosPad.offsetWidth + kaosPad.offsetLeft) - event.clientX) * freqMax;
 
 });
