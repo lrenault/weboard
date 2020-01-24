@@ -7,10 +7,9 @@ let instru;
 var comp_enable = document.querySelector('input[value="compressor"]');
 var comp_thresh = document.getElementById("comp-threshold");
 var comp_ratio  = document.getElementById("comp-ratio");
-
 let compressor = new Pizzicato.Effects.Compressor({
-  threshold: comp_thresh,
-  ratio: comp_ratio,
+  threshold: comp_thresh.valueAsNumber,
+  ratio: comp_ratio.valueAsNumber,
 });
 
 comp_enable.onchange = function() {
@@ -22,17 +21,20 @@ comp_enable.onchange = function() {
 }
 
 comp_thresh.oninput = function() {
-  compressor.threshold = this;
+  compressor.threshold = this.valueAsNumber;
   document.getElementById("comp-thresh-display").innerHTML = this.value;
 }
+
+comp_ratio.oninput = function() {
+  compressor.ratio = this.valueAsNumber;
+  document.getElementById("comp-ratio-display").innerHTML = this.value;
+}
+
 
 // disto
 var disto_enable = document.querySelector('input[value="disto"]');
 var disto_gain   = document.getElementById("disto-gain");
-var distoGainValue = disto_gain.value;
-console.log(distoGainValue);
-let disto = new Pizzicato.Effects.Distortion({ gain: disto_gain, });
-console.log(disto.gain);
+let disto = new Pizzicato.Effects.Distortion({ gain: disto_gain.valueAsNumber, });
 
 disto_enable.onchange = function() {
   if (disto_enable.checked) {
@@ -41,22 +43,21 @@ disto_enable.onchange = function() {
     instru.removeEffect(disto);
   }
 }
+
 disto_gain.oninput = function() {
-  disto.gain = this.value;
-  console.log(disto.gain);
+  disto.gain = this.valueAsNumber;
   document.getElementById("disto-gain-display").innerHTML = this.value;
 }
+
 
 // HighPassFilter
 var high_pass_enable = document.querySelector('input[value="highPassFilter"]');
 var high_pass_freq = document.getElementById("high-pass-freq");
 var high_pass_peak = document.getElementById("high-pass-peak");
-
 let highPassFilter = new Pizzicato.Effects.HighPassFilter({
-  frequency: high_pass_freq,
-  peak: high_pass_peak,
+  frequency: high_pass_freq.valueAsNumber,
+  peak: high_pass_peak.valueAsNumber,
 });
-
 
 high_pass_enable.onchange = function() {
   if (high_pass_enable.checked) {
@@ -66,24 +67,21 @@ high_pass_enable.onchange = function() {
   }
 }
 
-high_pass_freq.addEventListener("input", function() {
-  highPassFilter.frequency = high_pass_freq.value;
-})
-
 high_pass_freq.oninput = function() {
-  highPassFilter.frequency = this.value;
+  highPassFilter.frequency = this.valueAsNumber;
   document.getElementById("high-pass-freq-display").innerHTML = this.value;
 }
 high_pass_peak.oninput = function() {
-  highPassFilter.peak = this.value;
+  highPassFilter.peak = this.valueAsNumber;
   document.getElementById("high-pass-peak-display").innerHTML = this.value;
 }
 
-// Instrument and volume
+
+// Volume
 var volume_ = document.getElementById("volume");
 volume_.oninput = function() {
+  instru.volume = this.valueAsNumber;
   document.getElementById("volume-log").innerHTML = this.value;
-  instru.volume = this;
 }
 
 // PingPongDelay
@@ -125,24 +123,21 @@ instrumentConnected.onchange = function() {
 // Kaos-Pad
 kaosPad = document.getElementById("kaos-pad");
 kaosPad.addEventListener('mousemove', function(event) {
-  //xValue = event.clientX / (kaosPad.offsetWidth + kaosPad.offsetLeft);
-  //yValue = event.clientY / (kaosPad.offsetHeight);
   var rect = event.target.getBoundingClientRect();
   var xValue = (event.clientX - rect.left) / rect.width;
   var yValue = (event.clientY - rect.top) / rect.height;
 
+  // Disto
   if (document.getElementById('disto-gain-x').checked) {
     disto.gain = xValue;
     disto_gain.value = xValue;
     document.getElementById("disto-gain-display").innerHTML = Math.trunc(xValue * 100) / 100;
-
   } else if (document.getElementById('disto-gain-y').checked) {
     disto.gain = yValue;
-    console.log(disto.gain);
     disto_gain.value = yValue;
     document.getElementById("disto-gain-display").innerHTML = Math.trunc(yValue * 100) / 100;
   }
-
+  // High-Pass
   if (document.getElementById('high-pass-freq-x').checked) {
     highPassFilter.frequency = xValue * freqMax;
     high_pass_freq.value = xValue * freqMax;
@@ -150,7 +145,7 @@ kaosPad.addEventListener('mousemove', function(event) {
   } else if (document.getElementById('high-pass-freq-y').checked) {
     highPassFilter.frequency = yValue * freqMax;
     high_pass_freq.value = yValue * freqMax;
-    document.getElementById("high-pass-freq-display").innerHTML = Math.trunc(xValue * freqMax);
+    document.getElementById("high-pass-freq-display").innerHTML = Math.trunc(yValue * freqMax);
   }
 
   //pingPongDelay.time = event.pageX / document.body.clientWidth;

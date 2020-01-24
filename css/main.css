@@ -42,5 +42,5 @@ body {
 .kaos-pad {
   border: 1px solid red;
   height: 400px;
-  background: linear-gradient(135deg, rgb(0, 0, 44), rgb(255, 255, 255));
+  background: linear-gradient(135deg, rgb(0, 0, 44), rgb(255, 210, 255));
 }
