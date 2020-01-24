@@ -107,6 +107,7 @@ instrumentConnected.onchange = function() {
 
     instru = new Pizzicato.Sound({ source : 'input'}, function() {
       instru.addEffect(highPassFilter);
+      //instru.volume = volume_;
       instru.play();
       console.log("Connected");
     });
@@ -119,10 +120,26 @@ instrumentConnected.onchange = function() {
 // Kaos-Pad
 kaosPad = document.getElementById("kaos-pad");
 kaosPad.addEventListener('mousemove', function(event) {
+  xValue = event.clientX / (kaosPad.offsetWidth + kaosPad.offsetLeft);
+  yValue = event.clientY / (kaosPad.offsetHeight);
+  console.log(xValue);
+  console.log(yValue);
+
+  if (document.getElementById('fuzz-mid-high-x').checked) {
+    fuzz.midHighGain = xValue;
+  } else if (document.getElementById('fuzz-mid-high-y').checked) {
+    fuzz.midHighGain = yValue;
+  }
+
+  if (document.getElementById('high-pass-freq-x').checked) {
+    highPassFilter.frequency = xValue * freqMax;
+  } else if (document.getElementById('high-pass-freq-y').checked) {
+    highPassFilter.frequency = yValue * freqMax;
+  }
+
   //pingPongDelay.time = event.pageX / document.body.clientWidth;
   //instru.volume = event.pageX / document.body.clientWidth;
   //lowPassFilter.frequency = event.pageY / document.body.clientHeight * freqMax;
   //freq = Math.log((kaosPad.offsetWidth + kaosPad.offsetLeft) - event.clientX) * freqMax;
-  highPassFilter.frequency = freq;
-  console.log(freq);
+
 });

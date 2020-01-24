@@ -24,7 +24,7 @@
         <div class="slider">
           <label="comp-threshold">Threshold</label>
           <input type="range" min="-100" max="0" step="1" value="-24" id="comp-threshold">
-          <div class="slider-value">-24</div>
+          <div class="slider-value" id="comp-thresh-display">-24</div>
         </div>
         <div class="slider">
           <label="comp-ratio">Ratio</label>
@@ -50,6 +50,14 @@
           <label="fuzz-mid-high">Mid-High Gain</label>
           <input type="range" min="0" max="1" step="0.01" value="0.5" id="fuzz-mid-high">
           <div class="slider-value">0.5</div>
+          <div class="kaos-enable">
+            <input type="radio" id="fuzz-mid-high-none" name="fuzz-mid-high" value="none" checked>
+            <label for="fuzz-mid-high-none">None</label>
+            <input type="radio" id="fuzz-mid-high-x" name="fuzz-mid-high" value="x">
+            <label for="fuzz-mid-high-x">X-axis</label>
+            <input type="radio" id="fuzz-mid-high-y" name="fuzz-mid-high" value="y">
+            <label for="fuzz-mid-high-y">Y-axis</label>
+          </div>
         </div>
         <div class="slider">
           <label="fuzz-high">High Gain</label>
@@ -65,6 +73,14 @@
           <label="high-pass-freq">Frequency</label>
           <input type="range" min="10" max="22050" step="1" value="500" id="high-pass-freq">
           <div class="slider-value" id="high-pass-freq-display">500</div>
+          <div class="kaos-enable">
+            <input type="radio" id="high-pass-freq-none" name="high-pass-freq" value="none" checked>
+            <label for="high-pass-freq-none">None</label>
+            <input type="radio" id="high-pass-freq-x" name="high-pass-freq" value="x">
+            <label for="high-pass-freq-x">X-axis</label>
+            <input type="radio" id="high-pass-freq-y" name="high-pass-freq" value="y">
+            <label for="high-pass-freq-y">Y-axis</label>
+          </div>
         </div>
         <div class="slider">
           <label="high-pass-peak">Peak</label>
