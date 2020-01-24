@@ -15,6 +15,15 @@
         <label for="connectSource">Connect Instrument</label>
       </div>
 
+      <h4>Volume</h4>
+      <div class="slider-group"; style="border: 1px solid darkgrey;">
+        <div class="slider">
+          <label="volume-volume">Volume</label>
+          <input type="range" min="0" max="1" step="0.01" value="0.5" id="volume">
+          <div class="slider-value" id="volume-log">0.5</div>
+        </div>
+      </div>
+
       <input type="checkbox" id="compressor" name="compressor" value="compressor">
       <label for="compressor">Compressor</label>
       <div class="slider-group"; style="border: 1px solid blue;">
@@ -30,7 +39,7 @@
         </div>
       </div>
 
-      <input type="checkbox" id="disto" name="disto" value="disto" checked>
+      <input type="checkbox" id="disto" name="disto" value="disto">
       <label for="disto">Distortion</label>
       <div class="slider-group"; style="border: 1px solid green;">
         <div class="slider">
@@ -71,12 +80,34 @@
         </div>
       </div>
 
-      <h4>Volume</h4>
-      <div class="slider-group"; style="border: 1px solid darkgrey;">
+      <input type="checkbox" id="tremolo" name="tremolo" value="tremolo">
+      <label for="tremolo">Tremolo</label>
+      <div class="slider-group"; style="border: 1px solid blue;">
         <div class="slider">
-          <label="volume-volume">Volume</label>
-          <input type="range" min="0" max="1" step="0.01" value="0.5" id="volume">
-          <div class="slider-value" id="volume-log">0.5</div>
+          <label="tremolo-speed">Speed</label>
+          <input type="range" min="0" max="20" step="1" value="3" id="tremolo-speed">
+          <div class="slider-value" id="tremolo-speed-display">3</div>
+          <div class="kaos-enable">
+            <input type="radio" id="tremolo-speed-none" name="tremolo-speed" value="none" checked>
+            <label for="tremolo-speed-none">None</label>
+            <input type="radio" id="tremolo-speed-x" name="tremolo-speed" value="x">
+            <label for="tremolo-speed-x">X-axis</label>
+            <input type="radio" id="tremolo-speed-y" name="tremolo-speed" value="y">
+            <label for="tremolo-speed-y">Y-axis</label>
+          </div>
+        </div>
+        <div class="slider">
+          <label="tremolo-depth">Depth</label>
+          <input type="range" min="0" max="1" step="0.01" value="1" id="tremolo-depth">
+          <div class="slider-value" id="tremolo-depth-display">1</div>
+          <div class="kaos-enable">
+            <input type="radio" id="tremolo-depth-none" name="tremolo-depth" value="none" checked>
+            <label for="tremolo-depth-none">None</label>
+            <input type="radio" id="tremolo-depth-x" name="tremolo-depth" value="x">
+            <label for="tremolo-depth-x">X-axis</label>
+            <input type="radio" id="tremolo-depth-y" name="tremolo-depth" value="y">
+            <label for="tremolo-depth-y">Y-axis</label>
+          </div>
         </div>
       </div>
 

@@ -84,20 +84,32 @@ volume_.oninput = function() {
   document.getElementById("volume-log").innerHTML = this.value;
 }
 
-// PingPongDelay
-let pingPongDelay = new Pizzicato.Effects.PingPongDelay({
-  feedback: 0.6,
-  time: 0.4,
-  mix: 0.5
-});
+// Tremolo
+var tremoloEnable = document.querySelector('input[value="tremolo"]');
+var tremoloSpeed  = document.getElementById("tremolo-speed");
+var tremoloDepth  = document.getElementById("tremolo-depth");
+let tremolo = new Pizzicato.Effects.Tremolo({
+  speed: tremoloSpeed.valueAsNumber,
+  depth: tremoloDepth.valueAsNumber
+})
 
-// Reverb
-let reverb = new Pizzicato.Effects.Reverb({
-  time: 0.01,
-  decay: 0.01,
-  reverse: false,
-  mix: 0.5
-});
+tremoloEnable.onchange = function() {
+  if (tremoloEnable.checked) {
+    instru.addEffect(tremolo);
+  } else {
+    instru.removeEffect(tremolo);
+  }
+}
+
+tremoloSpeed.oninput = function() {
+  tremolo.speed = this.valueAsNumber;
+  document.getElementById("tremolo-speed-display").innerHTML = this.value;
+}
+
+tremoloDepth.oninput = function() {
+  tremolo.depth = this.valueAsNumber;
+  document.getElementById("tremolo-depth-display").innerHTML = this.value;
+}
 
 // Plug the instrument
 var instrumentConnected = document.querySelector('input[value="connectSource"]');
@@ -108,9 +120,6 @@ instrumentConnected.onchange = function() {
     console.log(Pizzicato.context);
 
     instru = new Pizzicato.Sound({ source : 'input'}, function() {
-      instru.addEffect(disto);
-      //instru.addEffect(highPassFilter);
-      //instru.volume = volume_;
       instru.play();
       console.log("Connected");
     });
@@ -146,6 +155,27 @@ kaosPad.addEventListener('mousemove', function(event) {
     highPassFilter.frequency = yValue * freqMax;
     high_pass_freq.value = yValue * freqMax;
     document.getElementById("high-pass-freq-display").innerHTML = Math.trunc(yValue * freqMax);
+  }
+
+  // Tremolo
+  if (document.getElementById('tremolo-speed-x').checked) {
+    tremolo.speed = xValue * 20;
+    tremoloSpeed.value = xValue * 20;
+    document.getElementById("tremolo-speed-display").innerHTML = Math.trunc(xValue * 20);
+  } else if (document.getElementById('tremolo-speed-y').checked) {
+    tremolo.speed = yValue * 20;
+    tremoloSpeed.value = yValue * 20;
+    document.getElementById("tremolo-speed-display").innerHTML = Math.trunc(yValue * 20);
+  }
+
+  if (document.getElementById('tremolo-depth-x').checked) {
+    tremolo.depth = xValue;
+    tremoloDepth.value = xValue;
+    document.getElementById("tremolo-depth-display").innerHTML = Math.trunc(xValue * 100) / 100;
+  } else if (document.getElementById('tremolo-depth-y').checked) {
+    tremolo.depth = yValue;
+    tremoloDepth.value = yValue;
+    document.getElementById("tremolo-depth-display").innerHTML = Math.trunc(yValue * 100) / 100;
   }
 
   //pingPongDelay.time = event.pageX / document.body.clientWidth;
